@@ -1,0 +1,17 @@
+{
+  "name": "project-coder-kevin",
+  "version": "0.0.1",
+  "description": "Projecto de kevin para coderhouse ",
+  "main": "./src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./src/app.js"
+  },
+  "author": "Kevin Contreras",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "uuid": "^10.0.0"
+  },
+  "type": "module"
+}
