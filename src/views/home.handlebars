@@ -1,0 +1,24 @@
+<h1>Todos los productos</h1>
+
+<div id='productList'>
+  {{#each arrProductsLimits}}
+    <div class='product'>
+      <h2>Producto: {{title}}</h2>
+      <p><strong>Descripción:</strong> {{description}}</p>
+      <p><strong>Código:</strong> {{code}}</p>
+      <p><strong>Precio:</strong> ${{price}}</p>
+      <p><strong>Stock disponible:</strong> {{stock}}</p>
+      <p><strong>Categoría:</strong> {{category}}</p>
+
+      <!-- Miniaturas -->
+      <h3>Thumbnails</h3>
+      <ul>
+        {{#each thumbnails}}
+          <li>
+            <a href='{{this}}' target='_blank'>Ver imagen</a>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  {{/each}}
+</div>

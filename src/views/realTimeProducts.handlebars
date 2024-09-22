@@ -1,0 +1,67 @@
+<h1>Real Time Products</h1>
+
+<form
+  id='productForm'
+  action='/api/products'
+  method='post'
+  enctype='multipart/form-data'
+>
+  <div>
+    <label for='title'>Título:</label>
+    <input type='text' id='title' name='title' required />
+  </div>
+
+  <div>
+    <label for='description'>Descripción:</label>
+    <textarea id='description' name='description' required></textarea>
+  </div>
+
+  <div>
+    <label for='code'>Código:</label>
+    <input type='text' id='code' name='code' required />
+  </div>
+
+  <div>
+    <label for='price'>Precio:</label>
+    <input type='number' id='price' name='price' required />
+  </div>
+
+  <div>
+    <label for='stock'>Stock:</label>
+    <input type='number' id='stock' name='stock' required />
+  </div>
+
+  <div>
+    <label for='category'>Categoría:</label>
+    <input type='text' id='category' name='category' required />
+  </div>
+
+  <div>
+    <label for='thumbnails'>Miniatura</label>
+    <input type='file' id='thumbnails' name='thumbnails' />
+  </div>
+
+  <button type='submit'>Agregar Producto</button>
+</form>
+
+<div id='productList'>
+  {{#each products}}
+    <div class='product'>
+      <h2>Producto: {{title}}</h2>
+      <p><strong>Descripción:</strong> {{description}}</p>
+      <p><strong>Código:</strong> {{code}}</p>
+      <p><strong>Precio:</strong> ${{price}}</p>
+      <p><strong>Stock disponible:</strong> {{stock}}</p>
+      <p><strong>Categoría:</strong> {{category}}</p>
+      <button
+        class='delete-button'
+        data-product-id='{{this.id}}'
+      >Borrar</button>
+      <hr />
+    </div>
+  {{/each}}
+</div>
+
+<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+<script src='/socket.io/socket.io.js'></script>
+<script src='/js/createProduct.js'></script>

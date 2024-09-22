@@ -1,7 +1,9 @@
-import {Router} from 'express';
-import {Product} from '../models/product.js';
 import fs from 'fs';
 import path from 'path';
+import {Router} from 'express';
+
+import {Product} from '../models/product.js';
+import {upLoader} from '../utils/multerUtils.js';
 
 const router = Router();
 const __dirname = path.resolve();
@@ -36,9 +38,10 @@ router.get('/:pid', (req, res) => {
   res.json(productById);
 });
 
-router.post('/', (req, res) => {
-  const {title, description, code, price, status, stock, category, thumbnails} =
-    req.body;
+router.post('/', upLoader.single('thumbnails'), (req, res) => {
+  const {title, description, code, price, status, stock, category} = req.body;
+
+  const thumbnailPath = req.file ? req.file.path : null;
 
   if (!title || !description || !code || !price || !stock || !category) {
     return res.status(400).json({message: 'Complete todos los campos'});
@@ -51,13 +54,12 @@ router.post('/', (req, res) => {
     status,
     stock,
     category,
-    thumbnails,
+    [thumbnailPath],
   );
 
   products.push(newProduct);
   saveProducts();
-
-  res.status(201).json(newProduct);
+  res.status(201).send('Producto Creado exitosamente');
 });
 
 router.put('/:pid', (req, res) => {
